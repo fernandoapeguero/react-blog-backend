@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import { MongoClient } from "mongodb";
 import path from "path";
+import res from "express/lib/response";
 
 const app = express();
 const PORT = 8000;
@@ -91,6 +92,10 @@ app.post("/api/articles/:name/add-comment", (req, res) => {
 
     res.status(200).json(updatedArticleInfo);
   }, res);
+});
+
+app.get("*", () => {
+  res.sendfile(path.join(__dirname + "./build/index.html"));
 });
 
 app.listen(PORT, () => {
